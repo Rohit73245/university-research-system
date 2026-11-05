@@ -1,0 +1,32 @@
+
+.card {
+  border-radius: 10px;
+}
+
+.card-header {
+  border-bottom: 1px solid #eeeeee;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #444444;
+}
+
+.form-control,
+.form-select {
+  padding: 10px;
+}
+
+.table th {
+  background-color: #f4f6fa;
+  color: #333333;
+  white-space: nowrap;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.btn {
+  border-radius: 5px;
+}

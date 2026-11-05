@@ -1,0 +1,167 @@
+
+<div class="container-fluid">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="fw-bold">Research Projects</h2>
+      <p class="text-muted">Manage university research projects</p>
+    </div>
+  </div>
+
+  <!-- Add Project Form -->
+  <div class="card shadow-sm border-0 mb-4">
+
+    <div class="card-header bg-white py-3">
+      <h5 class="mb-0">
+        {{ editingId !== null ? 'Edit Project' : 'Add New Project' }}
+      </h5>
+    </div>
+
+    <div class="card-body">
+
+      <form (ngSubmit)="saveProject()" #projectForm="ngForm">
+
+        <div class="row g-3">
+
+          <div class="col-md-6">
+            <label class="form-label">Project Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="title"
+              [(ngModel)]="project.title"
+              placeholder="Enter project name"
+              required>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Department</label>
+            <input
+              type="text"
+              class="form-control"
+              name="department"
+              [(ngModel)]="project.department"
+              placeholder="Enter department"
+              required>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Faculty Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="faculty"
+              [(ngModel)]="project.faculty"
+              placeholder="Enter faculty name"
+              required>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Project Status</label>
+            <select
+              class="form-select"
+              name="status"
+              [(ngModel)]="project.status">
+
+              <option value="Ongoing">Ongoing</option>
+              <option value="Completed">Completed</option>
+
+            </select>
+          </div>
+
+        </div>
+
+        <div class="mt-4">
+
+          <button type="submit" class="btn btn-primary me-2">
+            {{ editingId !== null ? 'Update Project' : 'Add Project' }}
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="resetForm()">
+            Clear
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Projects Table -->
+  <div class="card shadow-sm border-0">
+
+    <div class="card-header bg-white py-3">
+      <h5 class="mb-0">All Research Projects</h5>
+    </div>
+
+    <div class="card-body table-responsive">
+
+      <table class="table table-hover align-middle">
+
+        <thead>
+          <tr>
+            <th>Sr. No.</th>
+            <th>Project Name</th>
+            <th>Department</th>
+            <th>Faculty</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          @for (p of projects; track p.id; let i = $index) {
+            <tr>
+
+              <td>{{ i + 1 }}</td>
+              <td>{{ p.title }}</td>
+              <td>{{ p.department }}</td>
+              <td>{{ p.faculty }}</td>
+
+              <td>
+                <span
+                  class="badge"
+                  [class.bg-warning]="p.status === 'Ongoing'"
+                  [class.bg-success]="p.status === 'Completed'">
+                  {{ p.status }}
+                </span>
+              </td>
+
+              <td>
+                <button
+                  class="btn btn-sm btn-primary me-2"
+                  (click)="editProject(p)">
+                  Edit
+                </button>
+
+                <button
+                  class="btn btn-sm btn-danger"
+                  (click)="deleteProject(p.id)">
+                  Delete
+                </button>
+              </td>
+
+            </tr>
+          }
+
+          @if (projects.length === 0) {
+            <tr>
+              <td colspan="6" class="text-center text-muted">
+                No research projects found.
+              </td>
+            </tr>
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+
+</div>

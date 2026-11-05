@@ -1,0 +1,54 @@
+
+<div class="sidebar">
+  <h6 class="menu-title">MAIN MENU</h6>
+
+  <button
+    type="button"
+    class="menu-item"
+    [class.active]="activeModule === 'dashboard'"
+    (click)="moduleSelected.emit('dashboard')">
+    🏠 Dashboard
+  </button>
+  <button
+    type="button"
+    class="menu-item"
+    [class.active]="activeModule === 'research-projects'"
+    (click)="moduleSelected.emit('research-projects')">
+    📚 Research Projects
+  </button>
+  <button
+    type="button"
+    class="menu-item"
+    [class.active]="activeModule === 'laboratories'"
+    (click)="moduleSelected.emit('laboratories')">
+    🏢 Laboratories
+  </button>
+  <button
+    type="button"
+    class="menu-item"
+    [class.active]="activeModule === 'students'"
+    (click)="moduleSelected.emit('students')">
+    👨‍🎓 Students
+  </button>
+  <button
+    type="button"
+    class="menu-item"
+    [class.active]="activeModule === 'faculty'"
+    (click)="moduleSelected.emit('faculty')">
+    👨‍🏫 Faculty
+  </button>
+  <button
+    type="button"
+    class="menu-item"
+    [class.active]="activeModule === 'equipment'"
+    (click)="moduleSelected.emit('equipment')">
+    🔬 Equipment
+  </button>
+  <button
+    type="button"
+    class="menu-item"
+    [class.active]="activeModule === 'bookings'"
+    (click)="moduleSelected.emit('bookings')">
+    📅 Lab Bookings
+  </button>
+</div>

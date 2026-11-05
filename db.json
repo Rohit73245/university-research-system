@@ -1,0 +1,79 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "AI Based Healthcare System",
+      "department": "Computer Science",
+      "faculty": "Dr. Amit Patil",
+      "status": "Ongoing"
+    },
+    {
+      "id": 2,
+      "title": "Smart Agriculture Research",
+      "department": "Information Technology",
+      "faculty": "Dr. Sneha Sharma",
+      "status": "Completed"
+    }
+  ],
+  "laboratories": [
+    {
+      "id": 1,
+      "name": "Computer Science Lab",
+      "location": "Block A",
+      "capacity": 40,
+      "status": "Available"
+    },
+    {
+      "id": 2,
+      "name": "Physics Lab",
+      "location": "Block B",
+      "capacity": 30,
+      "status": "Occupied"
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "name": "Rahul Patil",
+      "department": "Computer Science",
+      "year": "Third Year"
+    },
+    {
+      "id": 2,
+      "name": "Priya Sharma",
+      "department": "Information Technology",
+      "year": "Second Year"
+    }
+  ],
+  "faculty": [
+    {
+      "id": 1,
+      "name": "Dr. Amit Patil",
+      "department": "Computer Science",
+      "designation": "Professor"
+    }
+  ],
+  "equipment": [
+    {
+      "id": 1,
+      "name": "Microscope",
+      "quantity": 10,
+      "condition": "Good"
+    },
+    {
+      "id": 2,
+      "name": "Computer",
+      "quantity": 25,
+      "condition": "Working"
+    }
+  ],
+  "bookings": [
+    {
+      "id": 1,
+      "laboratory": "Computer Science Lab",
+      "student": "Rahul Patil",
+      "date": "2026-11-10",
+      "status": "Approved"
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+<div class="container-fluid">
+  <div class="mb-4">
+    <h2 class="fw-bold">Dashboard</h2>
+    <p class="text-muted">Welcome to University Research and Laboratory Management System</p>
+  </div>
+
+  @if (loadErrors.length > 0) {
+    <div class="alert alert-warning" role="alert">
+      Some dashboard data could not be loaded:
+      {{ loadErrors.join(', ') }}. Check that JSON Server is running and try again.
+    </div>
+  }
+
+  <div class="row g-4">
+    <div class="col-12 col-sm-6 col-xl-4">
+      <div class="dashboard-card blue">
+        <h6>Research Projects</h6>
+        <h2>{{ loading ? '…' : (counts['projects'] ?? 'Unavailable') }}</h2>
+        <p>Total Projects</p>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-4">
+      <div class="dashboard-card green">
+        <h6>Laboratories</h6>
+        <h2>{{ loading ? '…' : (counts['laboratories'] ?? 'Unavailable') }}</h2>
+        <p>Total Laboratories</p>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-4">
+      <div class="dashboard-card orange">
+        <h6>Students</h6>
+        <h2>{{ loading ? '…' : (counts['students'] ?? 'Unavailable') }}</h2>
+        <p>Registered Students</p>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-4">
+      <div class="dashboard-card purple">
+        <h6>Faculty</h6>
+        <h2>{{ loading ? '…' : (counts['faculty'] ?? 'Unavailable') }}</h2>
+        <p>Faculty Members</p>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-4">
+      <div class="dashboard-card teal">
+        <h6>Equipment</h6>
+        <h2>{{ loading ? '…' : (counts['equipment'] ?? 'Unavailable') }}</h2>
+        <p>Equipment Records</p>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-4">
+      <div class="dashboard-card red">
+        <h6>Lab Bookings</h6>
+        <h2>{{ loading ? '…' : (counts['bookings'] ?? 'Unavailable') }}</h2>
+        <p>Total Bookings</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-12 col-xl-6">
+      <div class="card mt-4 shadow-sm border-0">
+        <div class="card-header bg-white py-3">
+          <h5 class="mb-0">Recent Research Projects</h5>
+        </div>
+
+        <div class="card-body table-responsive">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Sr. No.</th>
+                <th>Project Name</th>
+                <th>Department</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if (loading) {
+                <tr>
+                  <td colspan="4" class="text-center text-muted">Loading projects…</td>
+                </tr>
+              } @else if (counts['projects'] === null) {
+                <tr>
+                  <td colspan="4" class="text-center text-danger">
+                    Projects could not be loaded.
+                  </td>
+                </tr>
+              } @else {
+                @for (project of recentProjects; track project.id; let i = $index) {
+                  <tr>
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ project.title }}</td>
+                    <td>{{ project.department }}</td>
+                    <td>
+                      <span
+                        class="badge"
+                        [class.bg-warning]="project.status === 'Ongoing'"
+                        [class.text-dark]="project.status === 'Ongoing'"
+                        [class.bg-success]="project.status === 'Completed'"
+                        [class.bg-secondary]="project.status !== 'Ongoing' && project.status !== 'Completed'">
+                        {{ project.status }}
+                      </span>
+                    </td>
+                  </tr>
+                } @empty {
+                  <tr>
+                    <td colspan="4" class="text-center text-muted">
+                      No research projects found.
+                    </td>
+                  </tr>
+                }
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-xl-6">
+      <div class="card mt-4 shadow-sm border-0">
+        <div class="card-header bg-white py-3">
+          <h5 class="mb-0">Recent Lab Bookings</h5>
+        </div>
+
+        <div class="card-body table-responsive">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Sr. No.</th>
+                <th>Laboratory</th>
+                <th>Student</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if (loading) {
+                <tr>
+                  <td colspan="5" class="text-center text-muted">Loading bookings…</td>
+                </tr>
+              } @else if (counts['bookings'] === null) {
+                <tr>
+                  <td colspan="5" class="text-center text-danger">
+                    Bookings could not be loaded.
+                  </td>
+                </tr>
+              } @else {
+                @for (booking of recentBookings; track booking.id; let i = $index) {
+                  <tr>
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ booking.laboratory }}</td>
+                    <td>{{ booking.student }}</td>
+                    <td>{{ booking.date }}</td>
+                    <td>
+                      <span
+                        class="badge"
+                        [class.bg-warning]="booking.status === 'Pending'"
+                        [class.text-dark]="booking.status === 'Pending'"
+                        [class.bg-success]="booking.status === 'Approved'"
+                        [class.bg-danger]="booking.status === 'Rejected'">
+                        {{ booking.status }}
+                      </span>
+                    </td>
+                  </tr>
+                } @empty {
+                  <tr>
+                    <td colspan="5" class="text-center text-muted">
+                      No bookings found.
+                    </td>
+                  </tr>
+                }
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
